@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulado CCEE 2027</title>
+<style>
+:root{
+  --bg:#f5f8f9; --card:#ffffff; --ink:#17324a; --muted:#5b6b7a; --line:#dde6ea;
+  --accent:#0a7f80; --accent-soft:#e3f2f1; --ok:#1f8a4c; --ok-soft:#e5f5ec; --bad:#c0392b; --bad-soft:#fbe9e7;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1a22; --card:#16242f; --ink:#e6eef3; --muted:#9db0bd; --line:#26394a;
+  --accent:#3cc3bf; --accent-soft:#16383b; --ok:#4cc584; --ok-soft:#173528; --bad:#ef7a6c; --bad-soft:#3a201d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo{width:40px;height:40px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+header h1{font-size:18px;margin:0}
+header p{margin:0;color:var(--muted);font-size:13px}
+#tema{margin-left:auto}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 14px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button:disabled{opacity:.5;cursor:default}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+nav button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px}
+.hero{background:var(--accent-soft);border-color:transparent}
+.big{font-size:40px;font-weight:800;color:var(--accent);line-height:1}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.grid3 .card{margin:0}
+.stat{font-size:24px;font-weight:700}
+.muted{color:var(--muted);font-size:14px}
+.link{display:block;width:100%;text-align:left;margin-bottom:10px;padding:16px}
+.link b{display:block}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:99px;margin-bottom:8px}
+.q{font-weight:600;margin:0 0 12px}
+.op{display:block;width:100%;text-align:left;margin-bottom:8px}
+.op.sel{border-color:var(--accent);background:var(--accent-soft)}
+.op.ok{border-color:var(--ok);background:var(--ok-soft)}
+.op.bad{border-color:var(--bad);background:var(--bad-soft)}
+.exp{margin-top:10px;padding:12px;border-radius:10px;background:var(--accent-soft);font-size:14px}
+.row{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums;font-weight:700}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;flex:1}
+.bar i{display:block;height:100%;background:var(--accent)}
+.area{display:grid;grid-template-columns:150px 1fr 50px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.dots span{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;cursor:pointer}
+.dots span.f{background:var(--accent-soft);border-color:var(--accent)}
+.dots span.cur{outline:2px solid var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
+footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
+@media (max-width:520px){nav{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.area{grid-template-columns:110px 1fr 44px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">⚡</div>
+    <div><h1>Simulado CCEE 2027</h1><p>Certificação de Operadores • estudo pessoal</p></div>
+    <button id="tema">Modo escuro</button>
+  </header>
+  <nav>
+    <button data-v="inicio">Início</button>
+    <button data-v="prova">Prova</button>
+    <button data-v="estudar">Estudar</button>
+    <button data-v="desempenho">Desempenho</button>
+  </nav>
+  <main id="app"></main>
+  <footer>Questões autorais para estudo — não são oficiais da CCEE.</footer>
+</div>
+
+<script src="questoes.js"></script>
+<script>
+// ===== Configuração — ajuste à vontade =====
+const CONFIG = {
+  dataProva: "2027-05-04T09:00",      // data alvo (fim do roteiro); troque pela data do edital
+  rotuloProva: "4/5/2027 — fim do roteiro de estudos",
+  questoesProva: 15,
+  minutosProva: 25,
+  questoesEstudo: 10,
+  questoesTreino: 15,
+};
+
+// ===== Armazenamento (fica só no seu navegador) =====
+const KEY = "simulado-ccee-v1";
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+const S = Object.assign({ stats:{}, provas:[], tema:null }, load());
+// stats[i] = {v: vezes vista, a: acertos}
+
+function registra(i, acertou){
+  const s = S.stats[i] || (S.stats[i] = {v:0,a:0});
+  s.v++; if(acertou) s.a++; save();
+}
+
+// ===== Utilidades =====
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L = "ABCDEFG";
+const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const AREAS = [...new Set(QUESTOES.map(q=>q.area))];
+function porArea(){
+  const r = {}; AREAS.forEach(a=>r[a]={v:0,a:0});
+  QUESTOES.forEach((q,i)=>{ const s=S.stats[i]; if(s){ r[q.area].v+=s.v; r[q.area].a+=s.a; } });
+  return r;
+}
+function sorteia(n, fonte){ return shuffle(fonte || QUESTOES.map((_,i)=>i)).slice(0, n); }
+
+// ===== Tema =====
+function aplicaTema(){
+  const escuro = S.tema ? S.tema==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme = escuro ? "dark" : "light";
+  $("#tema").textContent = escuro ? "Modo claro" : "Modo escuro";
+}
+$("#tema").onclick = () => { S.tema = document.documentElement.dataset.theme==="dark" ? "light" : "dark"; save(); aplicaTema(); };
+
+// ===== Navegação =====
+let timer = null;
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => ir(b.dataset.v));
+function ir(v){
+  if(timer && v!=="prova-run"){ if(!confirm("Sair da prova em andamento?")) return; clearInterval(timer); timer=null; }
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", v.startsWith(b.dataset.v)));
+  ({inicio, prova, estudar, desempenho})[v]?.();
+  scrollTo(0,0);
+}
+
+// ===== Início =====
+function inicio(){
+  const dias = Math.max(0, Math.ceil((new Date(CONFIG.dataProva) - new Date())/864e5));
+  const vistas = Object.keys(S.stats).length;
+  const t = Object.values(S.stats).reduce((x,s)=>({v:x.v+s.v,a:x.a+s.a}),{v:0,a:0});
+  $("#app").innerHTML = `
+    <div class="card hero">
+      <div class="big">${dias}</div>
+      <b>dias para a prova</b>
+      <p class="muted">${esc(CONFIG.rotuloProva)}. Simulado com ${CONFIG.questoesProva} questões em ${CONFIG.minutosProva} minutos.</p>
+      <button class="primary" style="width:100%" onclick="ir('prova')">Fazer o simulado</button>
+    </div>
+    <div class="grid3">
+      <div class="card"><div class="stat">${vistas}</div><div class="muted">questões vistas de ${QUESTOES.length}</div></div>
+      <div class="card"><div class="stat">${t.v? Math.round(100*t.a/t.v)+"%" : "—"}</div><div class="muted">de acertos no estudo</div></div>
+      <div class="card"><div class="stat">${S.provas.length}</div><div class="muted">simulados feitos</div></div>
+    </div>
+    <button class="link" onclick="estudar()"><b>Estudar ${CONFIG.questoesEstudo} questões</b><span class="muted">Com a correção na hora</span></button>
+    <button class="link" onclick="treino()"><b>Treino nos pontos fracos</b><span class="muted">${CONFIG.questoesTreino} questões das áreas em que você mais errou</span></button>`;
+}
+
+// ===== Estudo (correção imediata) =====
+function estudar(lista, titulo){
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.v==="estudar"));
+  const fila = lista || sorteia(CONFIG.questoesEstudo);
+  let k = 0, acertos = 0;
+  function mostra(){
+    if(k >= fila.length){
+      $("#app").innerHTML = `<div class="card"><h2>Fim do estudo</h2><p>${acertos} de ${fila.length} acertos (${Math.round(100*acertos/fila.length)}%).</p>
+        <div class="row"><button onclick="estudar()">Mais ${CONFIG.questoesEstudo}</button><button class="primary" onclick="ir('inicio')">Início</button></div></div>`;
+      return;
+    }
+    const i = fila[k], q = QUESTOES[i];
+    $("#app").innerHTML = `<div class="card">
+      <div class="row"><span class="tag">${esc(q.area)}</span><span class="muted">${titulo||"Estudo"} • ${k+1}/${fila.length}</span></div>
+      <p class="q">${esc(q.q)}</p>
+      ${q.op.map((o,j)=>`<button class="op" data-j="${j}">${L[j]}) ${esc(o)}</button>`).join("")}
+      <div id="fb"></div></div>`;
+    document.querySelectorAll(".op").forEach(b => b.onclick = () => {
+      const j = +b.dataset.j, ok = j===q.c;
+      if(ok) acertos++;
+      registra(i, ok);
+      document.querySelectorAll(".op").forEach(x=>{ x.disabled=true; const n=+x.dataset.j;
+        if(n===q.c) x.classList.add("ok"); else if(n===j) x.classList.add("bad"); });
+      $("#fb").innerHTML = `<div class="exp"><b>${ok?"Correta!":"Resposta: "+L[q.c]}</b> ${esc(q.exp)}</div>
+        <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="primary" id="prox">${k+1<fila.length?"Próxima":"Ver resultado"}</button></div>`;
+      $("#prox").onclick = () => { k++; mostra(); };
+    });
+  }
+  mostra();
+}
+
+function treino(){
+  const r = porArea();
+  const ord = AREAS.slice().sort((x,y)=>{
+    const px = r[x].v ? r[x].a/r[x].v : 0.5, py = r[y].v ? r[y].a/r[y].v : 0.5; return px-py; });
+  const fracas = ord.slice(0,3);
+  const idx = QUESTOES.map((q,i)=>i).filter(i=>fracas.includes(QUESTOES[i].area));
+  estudar(sorteia(CONFIG.questoesTreino, idx), "Treino: " + fracas.join(", "));
+}
+
+// ===== Prova cronometrada =====
+function prova(){
+  $("#app").innerHTML = `<div class="card"><h2 style="margin-top:0">Simulado</h2>
+    <p>${CONFIG.questoesProva} questões sorteadas de todas as áreas, ${CONFIG.minutosProva} minutos. A correção aparece só no final.</p>
+    <button class="primary" onclick="comecaProva()">Começar</button></div>
+    ${S.provas.length?`<div class="card"><b>Últimos simulados</b><table><tr><th>Data</th><th>Nota</th><th>Tempo</th></tr>
+      ${S.provas.slice(-5).reverse().map(p=>`<tr><td>${new Date(p.d).toLocaleString("pt-BR")}</td><td>${p.n.toFixed(1)}</td><td>${Math.round(p.t/60)} min</td></tr>`).join("")}</table></div>`:""}`;
+}
+function comecaProva(){
+  const fila = sorteia(CONFIG.questoesProva);
+  const resp = Array(fila.length).fill(null);
+  const inicioT = Date.now(), limite = CONFIG.minutosProva*60;
+  let k = 0;
+  function tick(){
+    const r = limite - Math.floor((Date.now()-inicioT)/1000);
+    const el = $("#tm"); if(el) el.textContent = `${String(Math.floor(r/60)).padStart(2,"0")}:${String(r%60).padStart(2,"0")}`;
+    if(r<=0) entrega();
+  }
+  function mostra(){
+    const q = QUESTOES[fila[k]];
+    $("#app").innerHTML = `<div class="card">
+      <div class="row" style="margin-bottom:10px"><b>Questão ${k+1} de ${fila.length}</b><span>⏱ <span class="timer" id="tm"></span></span></div>
+      <div class="dots">${fila.map((_,n)=>`<span class="${resp[n]!==null?"f":""} ${n===k?"cur":""}" data-n="${n}">${n+1}</span>`).join("")}</div>
+      <span class="tag">${esc(q.area)}</span>
+      <p class="q">${esc(q.q)}</p>
+      ${q.op.map((o,j)=>`<button class="op ${resp[k]===j?"sel":""}" data-j="${j}">${L[j]}) ${esc(o)}</button>`).join("")}
+      <div class="row" style="margin-top:12px">
+        <button id="ant" ${k===0?"disabled":""}>Anterior</button>
+        ${k<fila.length-1?`<button class="primary" id="seg">Próxima</button>`:`<button class="primary" id="fim">Entregar</button>`}
+      </div></div>`;
+    tick();
+    document.querySelectorAll(".op").forEach(b=>b.onclick=()=>{ resp[k]=+b.dataset.j; mostra(); });
+    document.querySelectorAll(".dots span").forEach(d=>d.onclick=()=>{ k=+d.dataset.n; mostra(); });
+    $("#ant").onclick=()=>{k--;mostra();};
+    if($("#seg")) $("#seg").onclick=()=>{k++;mostra();};
+    if($("#fim")) $("#fim").onclick=()=>{
+      const falta = resp.filter(r=>r===null).length;
+      if(!falta || confirm(`Há ${falta} questão(ões) sem resposta. Entregar mesmo assim?`)) entrega();
+    };
+  }
+  function entrega(){
+    clearInterval(timer); timer=null;
+    let ac = 0;
+    fila.forEach((i,n)=>{ const ok = resp[n]===QUESTOES[i].c; if(ok) ac++; registra(i, ok); });
+    const nota = 10*ac/fila.length, tempo = Math.min(limite, Math.floor((Date.now()-inicioT)/1000));
+    S.provas.push({d:Date.now(), n:nota, a:ac, q:fila.length, t:tempo}); save();
+    const msg = nota>=9?"Domínio satisfatório":nota>=8?"Avançar com revisões":nota>=6?"Reforçar dificuldades":"Revisar o conteúdo";
+    $("#app").innerHTML = `<div class="card hero"><div class="big">${nota.toFixed(1)}</div>
+      <b>${ac} de ${fila.length} acertos • ${msg}</b><p class="muted">Tempo: ${Math.floor(tempo/60)} min ${tempo%60} s</p>
+      <div class="row"><button onclick="ir('prova')">Novo simulado</button><button class="primary" onclick="ir('desempenho')">Ver desempenho</button></div></div>
+      <h3>Gabarito comentado</h3>
+      ${fila.map((i,n)=>{ const q=QUESTOES[i], r=resp[n], ok=r===q.c; return `<div class="card">
+        <div class="row"><span class="tag">${esc(q.area)}</span><b style="color:var(--${ok?"ok":"bad"})">${ok?"✓ Acertou":"✗ Errou"}</b></div>
+        <p class="q">${n+1}. ${esc(q.q)}</p>
+        ${q.op.map((o,j)=>`<div class="op ${j===q.c?"ok":j===r?"bad":""}" style="border:1px solid var(--line);border-radius:10px;padding:8px 12px">${L[j]}) ${esc(o)}</div>`).join("")}
+        <div class="exp">${r===null?"<b>Sem resposta.</b> ":""}${esc(q.exp)}</div></div>`; }).join("")}`;
+    scrollTo(0,0);
+  }
+  timer = setInterval(tick, 1000);
+  mostra();
+}
+
+// ===== Desempenho =====
+function desempenho(){
+  const r = porArea();
+  $("#app").innerHTML = `<div class="card"><h2 style="margin-top:0">Acertos por área</h2>
+    ${AREAS.map(a=>{ const p = r[a].v ? Math.round(100*r[a].a/r[a].v) : null;
+      return `<div class="area"><span>${esc(a)}</span><div class="bar"><i style="width:${p||0}%"></i></div><b>${p===null?"—":p+"%"}</b></div>`; }).join("")}
+    <p class="muted">Abaixo de 60%: revisar • 60–79%: reforçar • 80–89%: avançar • 90%+: domínio.</p></div>
+    <div class="card"><h3 style="margin-top:0">Histórico de simulados</h3>
+    ${S.provas.length?`<table><tr><th>Data</th><th>Acertos</th><th>Nota</th></tr>${S.provas.slice().reverse().map(p=>`<tr><td>${new Date(p.d).toLocaleDateString("pt-BR")}</td><td>${p.a}/${p.q}</td><td>${p.n.toFixed(1)}</td></tr>`).join("")}</table>`:`<p class="muted">Nenhum simulado ainda.</p>`}</div>
+    <button onclick="if(confirm('Apagar todo o seu progresso?')){S.stats={};S.provas=[];save();desempenho();}">Zerar progresso</button>`;
+}
+
+aplicaTema();
+ir("inicio");
+</script>
+</body>
+</html>
