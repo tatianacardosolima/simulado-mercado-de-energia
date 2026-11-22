@@ -136,6 +136,11 @@ function porArea(){
   QUESTOES.forEach((q,i)=>{ const s=S.stats[i]; if(s){ r[q.area].v+=s.v; r[q.area].a+=s.a; } });
   return r;
 }
+// Embaralha as alternativas de uma questão, recalculando o índice da correta.
+function mix(i){
+  const q = QUESTOES[i], ord = shuffle(q.op.map((_,j)=>j));
+  return Object.assign({}, q, { op: ord.map(j=>q.op[j]), c: ord.indexOf(q.c) });
+}
 function sorteia(n, fonte){ return shuffle(fonte || QUESTOES.map((_,i)=>i)).slice(0, n); }
 
 // ===== Tema =====
@@ -197,7 +202,7 @@ function estudar(lista, titulo){
         <div class="row"><button onclick="estudar()">Mais ${CONFIG.questoesEstudo}</button><button class="primary" onclick="ir('inicio')">Início</button></div></div>`;
       return;
     }
-    const i = fila[k], q = QUESTOES[i];
+    const i = fila[k], q = mix(i);
     $("#app").innerHTML = `<div class="card">
       <div class="row"><span class="tag">${esc(q.area)}</span><span class="muted">${titulo||"Estudo"} • ${k+1}/${fila.length}</span></div>
       <p class="q">${esc(q.q)}</p>
@@ -236,6 +241,7 @@ function prova(){
 }
 function comecaProva(){
   const fila = sorteia(CONFIG.questoesProva);
+  const Q = fila.map(mix);
   const resp = Array(fila.length).fill(null);
   const inicioT = Date.now(), limite = CONFIG.minutosProva*60;
   let k = 0;
@@ -245,7 +251,7 @@ function comecaProva(){
     if(r<=0) entrega();
   }
   function mostra(){
-    const q = QUESTOES[fila[k]];
+    const q = Q[k];
     $("#app").innerHTML = `<div class="card">
       <div class="row" style="margin-bottom:10px"><b>Questão ${k+1} de ${fila.length}</b><span>⏱ <span class="timer" id="tm"></span></span></div>
       <div class="dots">${fila.map((_,n)=>`<span class="${resp[n]!==null?"f":""} ${n===k?"cur":""}" data-n="${n}">${n+1}</span>`).join("")}</div>
@@ -269,7 +275,7 @@ function comecaProva(){
   function entrega(){
     clearInterval(timer); timer=null;
     let ac = 0;
-    fila.forEach((i,n)=>{ const ok = resp[n]===QUESTOES[i].c; if(ok) ac++; registra(i, ok); });
+    fila.forEach((i,n)=>{ const ok = resp[n]===Q[n].c; if(ok) ac++; registra(i, ok); });
     const nota = 10*ac/fila.length, tempo = Math.min(limite, Math.floor((Date.now()-inicioT)/1000));
     S.provas.push({d:Date.now(), n:nota, a:ac, q:fila.length, t:tempo}); save();
     const msg = nota>=9?"Domínio satisfatório":nota>=8?"Avançar com revisões":nota>=6?"Reforçar dificuldades":"Revisar o conteúdo";
@@ -277,7 +283,7 @@ function comecaProva(){
       <b>${ac} de ${fila.length} acertos • ${msg}</b><p class="muted">Tempo: ${Math.floor(tempo/60)} min ${tempo%60} s</p>
       <div class="row"><button onclick="ir('prova')">Novo simulado</button><button class="primary" onclick="ir('desempenho')">Ver desempenho</button></div></div>
       <h3>Gabarito comentado</h3>
-      ${fila.map((i,n)=>{ const q=QUESTOES[i], r=resp[n], ok=r===q.c; return `<div class="card">
+      ${fila.map((i,n)=>{ const q=Q[n], r=resp[n], ok=r===q.c; return `<div class="card">
         <div class="row"><span class="tag">${esc(q.area)}</span><b style="color:var(--${ok?"ok":"bad"})">${ok?"✓ Acertou":"✗ Errou"}</b></div>
         <p class="q">${n+1}. ${esc(q.q)}</p>
         ${q.op.map((o,j)=>`<div class="op ${j===q.c?"ok":j===r?"bad":""}" style="border:1px solid var(--line);border-radius:10px;padding:8px 12px">${L[j]}) ${esc(o)}</div>`).join("")}

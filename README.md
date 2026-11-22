@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 41 questões de múltipla escolha, distribuídas em 7 áreas:
+São 68 questões de múltipla escolha, distribuídas em 8 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -27,6 +27,7 @@ São 41 questões de múltipla escolha, distribuídas em 7 áreas:
 | MCP e PLD | Mercado de curto prazo, exposição, convenção de sinais |
 | Comercialização | Comercializadoras, sazonalização, flexibilidade |
 | Medição e ETRM | Contratos versus medição, posição energética, arquitetura |
+| Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, exceção de 50 MW, cadastro, encerramento contratual |
 
 ## Como adicionar questões
 

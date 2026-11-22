@@ -142,4 +142,103 @@ const QUESTOES = [
   { area: "Medição e ETRM", q: "O que significam TUSD e TUST?",
     op: ["Tarifas de uso dos sistemas de distribuição e de transmissão", "Taxas de unidade de suprimento", "Tarifas únicas de serviço", "Tributos de uso do SIN"], c: 0,
     exp: "TUSD: Tarifa de Uso do Sistema de Distribuição. TUST: de Transmissão." },
+
+  // ---------- Comercialização varejista (aula de 22/11/2026: ações do representado) ----------
+  // T1 — conceito
+  { area: "Comercialização varejista", q: "A comercialização varejista se caracteriza pela relação comercial entre:",
+    op: ["A CCEE e as distribuidoras", "O varejista (representante) e as pessoas físicas ou jurídicas elegíveis à representação (representados)", "O ONS e os geradores", "A ANEEL e os consumidores cativos"], c: 1,
+    exp: "O varejista é o representante; os consumidores ou geradores elegíveis que ele representa são os representados." },
+  { area: "Comercialização varejista", q: "No contexto da comercialização varejista, quem é o \"representado\"?",
+    op: ["O comercializador habilitado como varejista", "A CCEE", "O consumidor ou gerador elegível ao ACL que é representado pelo varejista", "A distribuidora local"], c: 2,
+    exp: "Representado é a pessoa física ou jurídica elegível (consumidor ou gerador) que atua no ACL por meio do varejista." },
+  // T2 — quem pode ser varejista
+  { area: "Comercialização varejista", q: "Quem pode atuar como varejista?",
+    op: ["Somente distribuidoras", "Qualquer consumidor livre", "Comercializadores ou geradores habilitados a atuar como varejista", "Somente a CCEE"], c: 2,
+    exp: "Comercializadores ou geradores habilitados podem atuar como varejistas, representando consumidores e geradores." },
+  // T3 — quem pode ser representado
+  { area: "Comercialização varejista", q: "Quem pode ser representado por um varejista?",
+    op: ["Apenas consumidores residenciais", "Consumidores e geradores aptos a contratar no ACL", "Apenas geradores acima de 50 MW", "Apenas distribuidoras"], c: 1,
+    exp: "Podem ser representados consumidores e geradores elegíveis à contratação no ACL." },
+  // T4 — < 0,5 MW obrigatória
+  { area: "Comercialização varejista", q: "Uma unidade consumidora com demanda contratada inferior a 0,5 MW quer participar do ACL. O que é obrigatório?",
+    op: ["Aderir diretamente à CCEE como agente", "Ser representada por um varejista", "Contratar apenas pelo ACR", "Instalar geração própria"], c: 1,
+    exp: "Cargas com demanda contratada inferior a meio megawatt só participam do ACL por meio de representação varejista." },
+  { area: "Comercialização varejista", q: "Qual é o limiar de demanda contratada abaixo do qual a representação por varejista é obrigatória para participar do ACL?",
+    op: ["0,5 MW", "1 MW", "5 MW", "50 MW"], c: 0,
+    exp: "Abaixo de 0,5 MW (500 kW), a representação varejista é obrigatória. Não confunda com os 50 MW da exceção para geradores." },
+  // T5 — modelo simplificado PdC 1.8 obrigatório para < 0,5 MW
+  { area: "Comercialização varejista", q: "Qual procedimento de comercialização descreve o modelo simplificado?",
+    op: ["PdC 1.6", "PdC 1.8", "PdC 1.1", "Não há procedimento; é definido em contrato"], c: 1,
+    exp: "O modelo simplificado está no PdC 1.8. O modelo tradicional está no PdC 1.6." },
+  { area: "Comercialização varejista", q: "Com a vigência do modelo simplificado, como deve ocorrer a migração de cargas com demanda contratada inferior a 0,5 MW?",
+    op: ["Pelo modelo tradicional (PdC 1.6)", "Obrigatoriamente pelo modelo simplificado (PdC 1.8)", "À escolha da distribuidora", "Diretamente pela ANEEL"], c: 1,
+    exp: "Para cargas abaixo de meio megawatt, o modelo simplificado é obrigatório." },
+  // T6 — o que é "operacionalizar"
+  { area: "Comercialização varejista", q: "No modelo simplificado, o que significa a carga ser \"operacionalizada\" por esse modelo?",
+    op: ["Apenas a migração inicial", "Apenas o envio de dados de medição", "Tudo o que envolve a carga: migração, envio de dados, troca de fornecedor e retorno ao cativo", "Apenas a liquidação financeira"], c: 2,
+    exp: "Operacionalizar abrange todas as operações da carga: migração, envio de dados, troca de fornecedor e retorno ao mercado cativo." },
+  { area: "Comercialização varejista", q: "Qual destas operações NÃO foi citada como parte da operacionalização pelo modelo simplificado?",
+    op: ["Troca de fornecedor", "Retorno ao mercado cativo", "Envio de dados", "Definição do valor do PLD"], c: 3,
+    exp: "As operações citadas são migração, envio de dados, troca de fornecedor e retorno ao cativo. O PLD não é definido pelo varejista." },
+  // T7 — ≥ 0,5 MW opcional
+  { area: "Comercialização varejista", q: "Com a entrada do PdC 1.8, cargas com demanda contratada igual ou superior a 0,5 MW:",
+    op: ["Também são obrigadas a usar o modelo simplificado", "Podem usar o modelo simplificado de forma opcional", "Ficam proibidas de usar o modelo simplificado", "Devem voltar ao mercado cativo"], c: 1,
+    exp: "Para cargas iguais ou maiores que meio megawatt, o modelo simplificado é opcional." },
+  // T8 — PdC 1.6 continua
+  { area: "Comercialização varejista", q: "Com a entrada do PdC 1.8, o que acontece com o modelo tradicional descrito no PdC 1.6?",
+    op: ["É revogado", "Continua existindo", "Passa a valer só para consumidores residenciais", "É substituído integralmente pelo PdC 1.8"], c: 1,
+    exp: "O modelo tradicional (PdC 1.6) não deixa de existir; convive com o modelo simplificado." },
+  // T9 — usinas e cargas maiores não optantes
+  { area: "Comercialização varejista", q: "Uma usina geradora representada por um varejista deve ser operacionalizada por qual modelo?",
+    op: ["Modelo simplificado (PdC 1.8)", "Modelo tradicional (PdC 1.6)", "Qualquer um, à escolha do varejista", "Nenhum, pois usinas não podem ser representadas"], c: 1,
+    exp: "Usinas e cargas maiores que não optarem pelo simplificado são operacionalizadas pelo modelo tradicional, independentemente do modelo do representado." },
+  { area: "Comercialização varejista", q: "Uma carga de 2 MW representada por varejista não optou pelo modelo simplificado. Por qual modelo ela será operacionalizada?",
+    op: ["Modelo tradicional (PdC 1.6)", "Modelo simplificado (PdC 1.8), obrigatoriamente", "Diretamente pela distribuidora", "Ela não pode permanecer no ACL"], c: 0,
+    exp: "Acima de 0,5 MW o simplificado é opcional; quem não opta segue no modelo tradicional (PdC 1.6)." },
+  // T10 + T11 — objetivo e cadastro simplificado
+  { area: "Comercialização varejista", q: "Qual é o objetivo do mecanismo de comercialização varejista?",
+    op: ["Reduzir o número de consumidores no ACL", "Ampliar a participação de representados no mercado, com cadastro simplificado", "Substituir a CCEE na contabilização", "Eliminar a figura do comercializador"], c: 1,
+    exp: "O mecanismo amplia a participação dos representados, já que o cadastro deles na CCEE é simplificado." },
+  { area: "Comercialização varejista", q: "Na representação varejista, quem fica responsável pelas obrigações, operações e cadastro dos ativos do representado junto à CCEE?",
+    op: ["O próprio representado", "A distribuidora", "O varejista", "O ONS"], c: 2,
+    exp: "O representado não precisa aderir à CCEE; as obrigações, operações e o cadastro de ativos ficam a cargo do varejista." },
+  // T12 — varejista adere
+  { area: "Comercialização varejista", q: "Sobre a adesão à CCEE na comercialização varejista, é correto afirmar:",
+    op: ["O representado e o varejista precisam aderir", "Apenas o varejista precisa cumprir o processo de adesão", "Nenhum dos dois precisa aderir", "Apenas o representado precisa aderir"], c: 1,
+    exp: "O varejista cumpre o processo de adesão à CCEE; o representado, em regra, não." },
+  // T13 + T14 — regra e exceção
+  { area: "Comercialização varejista", q: "Em regra, o representado deve ser agente da CCEE?",
+    op: ["Sim, sempre", "Não. Ele atua por meio do varejista, salvo uma exceção para certos geradores", "Sim, quando a carga é menor que 0,5 MW", "Sim, quando migra pelo modelo simplificado"], c: 1,
+    exp: "Em regra, o representado não é agente da CCEE. A exceção é para alguns geradores de grande porte." },
+  { area: "Comercialização varejista", q: "Qual gerador representado é exceção e mantém adesão direta como agente da CCEE?",
+    op: ["Qualquer gerador solar", "Gerador com concessão ou autorização, capacidade instalada igual ou superior a 50 MW e não comprometido com contratos regulados ou cotas", "Gerador com menos de 0,5 MW", "Gerador que opta pelo modelo simplificado"], c: 1,
+    exp: "A exceção são geradores com concessão ou autorização, capacidade instalada ≥ 50 MW e não comprometidos com contratos do ambiente regulado ou cotas (na aula, \"CCAR, CR ou conta\")." },
+  { area: "Comercialização varejista", q: "Qual capacidade instalada mínima define a exceção dos geradores que devem permanecer como agentes da CCEE?",
+    op: ["0,5 MW", "5 MW", "30 MW", "50 MW"], c: 3,
+    exp: "Geradores com capacidade instalada igual ou superior a 50 MW (e que atendam às demais condições) são a exceção." },
+  // T15 + T16 — atualização de dados
+  { area: "Comercialização varejista", q: "Como deve fluir a atualização cadastral do representado?",
+    op: ["Representado → CCEE diretamente", "Representado → varejista → CCEE", "Distribuidora → CCEE", "CCEE → varejista → representado"], c: 1,
+    exp: "O representado mantém os dados atualizados com o varejista, e o varejista os mantém atualizados perante a CCEE." },
+  { area: "Comercialização varejista", q: "Por que é importante manter os dados do representado atualizados na CCEE?",
+    op: ["Para calcular o PLD", "Porque a CCEE pode precisar entrar em contato com o representado", "Para definir a tarifa da distribuidora", "Para dispensar o contrato com o varejista"], c: 1,
+    exp: "A CCEE pode precisar se comunicar com o representado; os dados atualizados garantem essa comunicação." },
+  // T17 — canais
+  { area: "Comercialização varejista", q: "Para consumidores de menor porte migrados pelo modelo simplificado, a atualização cadastral ocorre via:",
+    op: ["APIs", "Ofício à ANEEL", "Plataforma cadastral do modelo tradicional", "E-mail ao ONS"], c: 0,
+    exp: "No modelo simplificado, a atualização é via APIs. Geradores e consumidores do modelo tradicional usam a plataforma cadastral no ambiente de operações da CCEE." },
+  { area: "Comercialização varejista", q: "Representados geradores e consumidores com ativos modelados pelo modelo tradicional atualizam seus dados por meio de:",
+    op: ["APIs do modelo simplificado", "Plataforma cadastral no ambiente de operações da CCEE", "Contato direto com o ONS", "Não há atualização no modelo tradicional"], c: 1,
+    exp: "No modelo tradicional, a atualização ocorre pela plataforma cadastral no ambiente de operações; no simplificado, via APIs." },
+  // T18 — atuação direta
+  { area: "Comercialização varejista", q: "Na maioria dos casos, o representado tem atuação direta com a CCEE?",
+    op: ["Sim, em todas as operações", "Não, pois toda a sua operação ocorre via varejista", "Sim, na liquidação financeira", "Sim, no envio de medição"], c: 1,
+    exp: "Em linhas gerais, o representado não atua diretamente com a CCEE; suas operações passam pelo varejista." },
+  // T19 + T20 — encerramento contratual
+  { area: "Comercialização varejista", q: "O contrato de um representado com seu varejista é encerrado e ele não dá continuidade às operações comerciais. Qual o risco?",
+    op: ["Nenhum, a CCEE assume o fornecimento", "Entrar em fluxo de suspensão do fornecimento de energia", "Passar automaticamente a agente da CCEE", "Virar varejista"], c: 1,
+    exp: "Sem continuidade (novo contrato ou retorno ao cativo), o representado pode entrar em fluxo de suspensão do fornecimento." },
+  { area: "Comercialização varejista", q: "Segundo a aula, qual é o principal ponto de atenção do representado no dia a dia da comercialização varejista?",
+    op: ["Calcular o PLD", "Acompanhar sua relação contratual com o varejista, como vigência e encerramento", "Enviar medições diretamente à CCEE", "Aderir à CCEE anualmente"], c: 1,
+    exp: "Como a operação passa pelo varejista, o ponto crítico do representado é a relação contratual: vigência, renovação e transição." },
 ];
