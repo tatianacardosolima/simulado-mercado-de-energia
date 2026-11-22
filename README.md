@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 68 questões de múltipla escolha, distribuídas em 8 áreas. As alternativas são embaralhadas a cada exibição.
+São 67 questões de múltipla escolha, distribuídas em 8 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
