@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 205 questões de múltipla escolha, distribuídas em 16 áreas. As alternativas são embaralhadas a cada exibição.
+São 226 questões de múltipla escolha, distribuídas em 17 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -36,6 +36,7 @@ São 205 questões de múltipla escolha, distribuídas em 16 áreas. As alternat
 | Retorno ao mercado cativo | Art. 15 da Lei 9.074, antecedência de 5 anos, redução a critério da distribuidora |
 | Atendimento sem CCER | Anuência da distribuidora, consumidor adimplente com representação obrigatória, casos de aplicação |
 | Suspensão no modelo tradicional | Motivadores, prazos de corte (N+4, N+5 a N+10, 48 h), resolução, rescisão, desligamento do varejista, responsabilidade pela carga, realocação de débitos, regularização |
+| Suspensão no modelo simplificado | Início em M−11 DU, recusa via API, cancelamento pelo varejista em 4 dias, resolução em 16 dias, inabilitação ou desligamento do varejista, justificativa de atraso, realocação de débitos |
 
 ## Como adicionar questões
 
