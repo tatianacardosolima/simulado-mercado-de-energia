@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 175 questões de múltipla escolha, distribuídas em 14 áreas. As alternativas são embaralhadas a cada exibição.
+São 180 questões de múltipla escolha, distribuídas em 15 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -34,6 +34,7 @@ São 175 questões de múltipla escolha, distribuídas em 14 áreas. As alternat
 | Portabilidade de varejistas | Troca de varejista nos modelos simplificado (via APIs, CCV) e tradicional (Plataforma Cadastral e SIGA) |
 | Adesão à CCEE | Submódulo 1.1, habilitação comercial e técnica, elegibilidade (grupo A, 500 kW) |
 | Retorno ao mercado cativo | Art. 15 da Lei 9.074, antecedência de 5 anos, redução a critério da distribuidora |
+| Atendimento sem CCER | Anuência da distribuidora, consumidor adimplente com representação obrigatória, casos de aplicação |
 
 ## Como adicionar questões
 
