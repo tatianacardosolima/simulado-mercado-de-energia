@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 124 questões de múltipla escolha, distribuídas em 10 áreas. As alternativas são embaralhadas a cada exibição.
+São 158 questões de múltipla escolha, distribuídas em 11 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -30,6 +30,7 @@ São 124 questões de múltipla escolha, distribuídas em 10 áreas. As alternat
 | Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, exceção de 50 MW, cadastro, encerramento contratual |
 | Encerramento da representação | Modalidades, prazos de 15 e 90 dias, notificação, alternativas de continuidade, inabilitação do varejista |
 | Resolução e resilição | Prazos de 15 e 90 dias, exemplos de datas e vigência, caminhos (adesão, troca de varejista, retorno ao cativo), SMA, dupla representação, histórico |
+| Modelo simplificado | Encerramento via API, troca de varejista, retorno ao cativo, adesão à CCEE, prazos M−12 e M−11 DU, transferência compulsória, inadimplência |
 
 ## Como adicionar questões
 
