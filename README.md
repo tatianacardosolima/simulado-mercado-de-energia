@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 158 questões de múltipla escolha, distribuídas em 11 áreas. As alternativas são embaralhadas a cada exibição.
+São 175 questões de múltipla escolha, distribuídas em 14 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -31,6 +31,9 @@ São 158 questões de múltipla escolha, distribuídas em 11 áreas. As alternat
 | Encerramento da representação | Modalidades, prazos de 15 e 90 dias, notificação, alternativas de continuidade, inabilitação do varejista |
 | Resolução e resilição | Prazos de 15 e 90 dias, exemplos de datas e vigência, caminhos (adesão, troca de varejista, retorno ao cativo), SMA, dupla representação, histórico |
 | Modelo simplificado | Encerramento via API, troca de varejista, retorno ao cativo, adesão à CCEE, prazos M−12 e M−11 DU, transferência compulsória, inadimplência |
+| Portabilidade de varejistas | Troca de varejista nos modelos simplificado (via APIs, CCV) e tradicional (Plataforma Cadastral e SIGA) |
+| Adesão à CCEE | Submódulo 1.1, habilitação comercial e técnica, elegibilidade (grupo A, 500 kW) |
+| Retorno ao mercado cativo | Art. 15 da Lei 9.074, antecedência de 5 anos, redução a critério da distribuidora |
 
 ## Como adicionar questões
 
