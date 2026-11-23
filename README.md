@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 226 questões de múltipla escolha, distribuídas em 17 áreas. As alternativas são embaralhadas a cada exibição.
+São 226 questões de múltipla escolha, distribuídas em 8 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -27,16 +27,7 @@ São 226 questões de múltipla escolha, distribuídas em 17 áreas. As alternat
 | MCP e PLD | Mercado de curto prazo, exposição, convenção de sinais |
 | Comercialização | Comercializadoras, sazonalização, flexibilidade |
 | Medição e ETRM | Contratos versus medição, posição energética, arquitetura |
-| Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, exceção de 50 MW, cadastro, encerramento contratual |
-| Encerramento da representação | Modalidades, prazos de 15 e 90 dias, notificação, alternativas de continuidade, inabilitação do varejista |
-| Resolução e resilição | Prazos de 15 e 90 dias, exemplos de datas e vigência, caminhos (adesão, troca de varejista, retorno ao cativo), SMA, dupla representação, histórico |
-| Modelo simplificado | Encerramento via API, troca de varejista, retorno ao cativo, adesão à CCEE, prazos M−12 e M−11 DU, transferência compulsória, inadimplência |
-| Portabilidade de varejistas | Troca de varejista nos modelos simplificado (via APIs, CCV) e tradicional (Plataforma Cadastral e SIGA) |
-| Adesão à CCEE | Submódulo 1.1, habilitação comercial e técnica, elegibilidade (grupo A, 500 kW) |
-| Retorno ao mercado cativo | Art. 15 da Lei 9.074, antecedência de 5 anos, redução a critério da distribuidora |
-| Atendimento sem CCER | Anuência da distribuidora, consumidor adimplente com representação obrigatória, casos de aplicação |
-| Suspensão no modelo tradicional | Motivadores, prazos de corte (N+4, N+5 a N+10, 48 h), resolução, rescisão, desligamento do varejista, responsabilidade pela carga, realocação de débitos, regularização |
-| Suspensão no modelo simplificado | Início em M−11 DU, recusa via API, cancelamento pelo varejista em 4 dias, resolução em 16 dias, inabilitação ou desligamento do varejista, justificativa de atraso, realocação de débitos |
+| Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, encerramento da representação, resolução e resilição, modelo simplificado, portabilidade, adesão à CCEE, retorno ao cativo, atendimento sem CCER, suspensão do fornecimento (modelos tradicional e simplificado) |
 
 ## Como adicionar questões
 
