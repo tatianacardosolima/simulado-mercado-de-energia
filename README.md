@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 287 questões de múltipla escolha, distribuídas em 9 áreas. As alternativas são embaralhadas a cada exibição.
+São 308 questões de múltipla escolha, distribuídas em 9 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -28,7 +28,7 @@ São 287 questões de múltipla escolha, distribuídas em 9 áreas. As alternati
 | Comercialização | Comercializadoras, sazonalização, flexibilidade |
 | Medição e ETRM | Contratos versus medição, posição energética, arquitetura |
 | Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, encerramento da representação, resolução e resilição, modelo simplificado, portabilidade, adesão à CCEE, retorno ao cativo, atendimento sem CCER, suspensão do fornecimento (modelos tradicional e simplificado) |
-| MCP | Apuração do mercado de curto prazo: funcionamento do SIN, papel da CCEE, dados de entrada, trilha de liquidação, energia verificada e contratada, balanço energético, recurso e requisito, exposição por tipo de agente, cálculo NET × PLD, TMMCP e resultado mensal, impacto do submercado de registro do contrato |
+| MCP | Apuração do mercado de curto prazo: funcionamento do SIN, papel da CCEE, dados de entrada, trilha de liquidação, energia verificada e contratada, balanço energético, recurso e requisito, exposição por tipo de agente, cálculo NET × PLD, TMMCP e resultado mensal, impacto do submercado de registro do contrato, modulação dos contratos (flat, conforme carga, geração e MRE, declarada, limites) |
 
 ## Como adicionar questões
 
