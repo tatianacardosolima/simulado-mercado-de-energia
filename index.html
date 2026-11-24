@@ -17,6 +17,21 @@
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- Google Analytics 4 com modo de consentimento: sem cookies até a pessoa aceitar -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+var CONSENT_KEY = "simulado-cookies";
+var consentGA = null;
+try { consentGA = localStorage.getItem(CONSENT_KEY); } catch(e) {}
+gtag("consent", "default", {
+  analytics_storage: consentGA === "aceito" ? "granted" : "denied",
+  ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied"
+});
+gtag("js", new Date());
+gtag("config", "G-HYV93Y2XR6");
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HYV93Y2XR6"></script>
 <style>
 :root{
   --bg:#faf7fb; --card:#ffffff; --ink:#2a1638; --muted:#6b5a78; --line:#ebe2ef;
@@ -85,6 +100,12 @@ nav button.on{background:var(--accent-soft);border-color:var(--accent);color:var
 table{width:100%;border-collapse:collapse;font-size:14px}
 td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
+footer button.cookies-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+#cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;max-width:640px;margin:0 auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:13px}
+#cookies p{margin:0 0 8px}
+#cookies button{padding:6px 14px}
+#cookies .row{justify-content:flex-end;gap:8px}
+#cookies[hidden]{display:none}
 @media (max-width:520px){#tema{padding:6px 10px;font-size:13px}header h1{font-size:16px}nav{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.area{grid-template-columns:110px 1fr 44px}}
 </style>
 </head>
@@ -104,7 +125,11 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
     <button data-v="desempenho">Desempenho</button>
   </nav>
   <main id="app"></main>
-  <footer>Feito por <a href="https://www.linkedin.com/in/tatiana-cardoso-lima/" target="_blank" rel="noopener">Tatiana Cardoso Lima</a> · <a href="https://github.com/tatianacardosolima/simulado-mercado-de-energia" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">link do simulado</a><br>Questões autorais para estudo — não são oficiais da CCEE.</footer>
+  <footer>Feito por <a href="https://www.linkedin.com/in/tatiana-cardoso-lima/" target="_blank" rel="noopener">Tatiana Cardoso Lima</a> · <a href="https://github.com/tatianacardosolima/simulado-mercado-de-energia" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">link do simulado</a><br>Questões autorais para estudo — não são oficiais da CCEE. · <button class="cookies-link" onclick="mostraCookies()">Cookies</button></footer>
+  <div id="cookies" role="dialog" aria-label="Aviso de cookies" hidden>
+    <p>Posso usar cookies do Google Analytics para contar os acessos ao simulado? Nada é usado para anúncios.</p>
+    <div class="row"><button onclick="escolheCookies('recusado')">Recusar</button><button class="primary" onclick="escolheCookies('aceito')">Aceitar</button></div>
+  </div>
 </div>
 
 <script src="questoes.js"></script>
@@ -167,8 +192,22 @@ function ir(v){
   scrollTo(0,0);
 }
 
+// ===== Analytics: eventos e consentimento =====
+function ev(nome, params){ try { gtag("event", nome, params || {}); } catch(e) {} }
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-ev]");
+  if (t) ev(t.dataset.ev, t.dataset.m ? {metodo: t.dataset.m} : {});
+});
+function mostraCookies(){ document.getElementById("cookies").hidden = false; }
+function escolheCookies(v){
+  try { localStorage.setItem(CONSENT_KEY, v); } catch(e) {}
+  gtag("consent", "update", {analytics_storage: v === "aceito" ? "granted" : "denied"});
+  document.getElementById("cookies").hidden = true;
+}
+if (consentGA !== "aceito" && consentGA !== "recusado") mostraCookies();
+
 // ===== Compartilhar =====
-const LINK = "https://tatianacardosolima.github.io/simulado-mercado-de-energia/";
+const LINK ="https://tatianacardosolima.github.io/simulado-mercado-de-energia/";
 
 // ===== Reportar erro (Google Forms com campos pré-preenchidos) =====
 const FORM_ERRO = "https://docs.google.com/forms/d/e/1FAIpQLSdQI4CTMBYnDwNDPbCOJtdmVPLGpIrHAkS0n3xyXm4whivPvA/viewform";
@@ -180,7 +219,7 @@ function linkErro(i, marcada){
     "entry.1887220918": marcada
   });
   return `<div class="reportar"><span>Questão nº ${i+1}</span>
-    <a href="${FORM_ERRO}?${p}" target="_blank" rel="noopener">Acho que essa resposta está errada</a></div>`;
+    <a href="${FORM_ERRO}?${p}" target="_blank" rel="noopener" data-ev="reportou_erro">Acho que essa resposta está errada</a></div>`;
 }
 const TEXTO_SHARE = "Simulado gratuito para a Certificação de Operadores da CCEE 2027:";
 function copiarLink(b){
@@ -223,10 +262,10 @@ function inicio(){
       <b>Compartilhe o simulado</b>
       <span class="url">${esc(LINK)}</span>
       <div class="share">
-        <button onclick="copiarLink(this)">Copiar link</button>
-        <a href="https://wa.me/?text=${encodeURIComponent(TEXTO_SHARE + " " + LINK)}" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(LINK)}" target="_blank" rel="noopener">LinkedIn</a>
-        ${navigator.share ? `<button onclick="navigator.share({title:document.title,text:TEXTO_SHARE,url:LINK}).catch(()=>{})">Mais opções</button>` : ""}
+        <button onclick="copiarLink(this)" data-ev="compartilhou" data-m="copiar">Copiar link</button>
+        <a href="https://wa.me/?text=${encodeURIComponent(TEXTO_SHARE + " " + LINK)}" target="_blank" rel="noopener" data-ev="compartilhou" data-m="whatsapp">WhatsApp</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(LINK)}" target="_blank" rel="noopener" data-ev="compartilhou" data-m="linkedin">LinkedIn</a>
+        ${navigator.share ? `<button data-ev="compartilhou" data-m="nativo" onclick="navigator.share({title:document.title,text:TEXTO_SHARE,url:LINK}).catch(()=>{})">Mais opções</button>` : ""}
       </div>
     </div>
     <div class="card sobre">
@@ -244,6 +283,7 @@ function inicio(){
 function estudar(lista, titulo){
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.v==="estudar"));
   const fila = lista || sorteia(CONFIG.questoesEstudo);
+  ev(titulo && titulo.startsWith("Treino") ? "iniciou_treino" : "iniciou_estudo");
   let k = 0, acertos = 0;
   function mostra(){
     if(k >= fila.length){
@@ -291,6 +331,7 @@ function prova(){
 }
 function comecaProva(){
   const fila = sorteia(CONFIG.questoesProva);
+  ev("iniciou_prova");
   const Q = fila.map(mix);
   const resp = Array(fila.length).fill(null);
   const inicioT = Date.now(), limite = CONFIG.minutosProva*60;
@@ -328,6 +369,7 @@ function comecaProva(){
     fila.forEach((i,n)=>{ const ok = resp[n]===Q[n].c; if(ok) ac++; registra(i, ok); });
     const nota = 10*ac/fila.length, tempo = Math.min(limite, Math.floor((Date.now()-inicioT)/1000));
     S.provas.push({d:Date.now(), n:nota, a:ac, q:fila.length, t:tempo}); save();
+    ev("concluiu_prova", {nota: Math.round(nota*10)/10, acertos: ac, questoes: fila.length, minutos: Math.round(tempo/60)});
     const msg = nota>=9?"Domínio satisfatório":nota>=8?"Avançar com revisões":nota>=6?"Reforçar dificuldades":"Revisar o conteúdo";
     $("#app").innerHTML = `<div class="card hero"><div class="big">${nota.toFixed(1)}</div>
       <b>${ac} de ${fila.length} acertos • ${msg}</b><p class="muted">Tempo: ${Math.floor(tempo/60)} min ${tempo%60} s</p>
