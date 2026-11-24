@@ -42,15 +42,24 @@ Edite o arquivo [`questoes.js`](questoes.js) e copie um bloco existente:
   exp: "Explicação mostrada na correção." },
 ```
 
-Uma área nova aparece automaticamente na tela de Desempenho.
+Uma área nova aparece automaticamente na tela de Desempenho. Acrescente sempre no fim do arquivo: o progresso salvo no navegador usa a posição de cada questão.
+
+Depois de mudar o `questoes.js`, gere de novo as páginas por tema e o sitemap:
+
+```
+node gerar-paginas.js
+```
 
 A data da prova, o número de questões e o tempo ficam no objeto `CONFIG`, no início do `<script>` do [`index.html`](index.html).
 
 ## Estrutura
 
 ```
-index.html   → interface e lógica do simulado (HTML, CSS e JavaScript puros)
-questoes.js  → banco de questões
+index.html        → interface e lógica do simulado (HTML, CSS e JavaScript puros)
+questoes.js       → banco de questões
+gerar-paginas.js  → gera questoes/*.html (uma página por tema, para buscadores) e sitemap.xml
+questoes/         → páginas estáticas por tema (geradas, não editar à mão)
+sitemap.xml       → lista de páginas para o Google Search Console (gerado)
 ```
 
 ## Aviso

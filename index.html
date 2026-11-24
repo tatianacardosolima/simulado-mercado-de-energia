@@ -3,12 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulado Mercado de Energia · Tatiana Cardoso Lima</title>
-<meta name="description" content="Simulado gratuito para a Certificação de Operadores da CCEE 2027: questões comentadas, prova cronometrada e desempenho por área. Por Tatiana Cardoso Lima.">
+<title>Simulado CCEE 2027 grátis · Certificação de Operadores · Questões comentadas</title>
+<meta name="description" content="Simulado CCEE grátis para a Certificação de Operadores 2027: mais de 300 questões comentadas sobre MCP, PLD, comercialização varejista, ACR e ACL, com prova cronometrada e desempenho por área.">
+<link rel="canonical" href="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Simulado CCEE · Mercado de Energia",
+      "url": "https://tatianacardosolima.github.io/simulado-mercado-de-energia/",
+      "inLanguage": "pt-BR",
+      "author": {"@type": "Person", "name": "Tatiana Cardoso Lima", "url": "https://www.linkedin.com/in/tatiana-cardoso-lima/"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "O simulado CCEE é gratuito?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Sim. O simulado é gratuito, não precisa de cadastro e o seu progresso fica salvo só no seu navegador."}},
+        {"@type": "Question", "name": "Para qual prova é este simulado?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Para a Certificação de Operadores da CCEE (Câmara de Comercialização de Energia Elétrica), edição 2027. As questões são autorais, para estudo, e não são oficiais da CCEE."}},
+        {"@type": "Question", "name": "Quais temas o simulado CCEE cobre?",
+         "acceptedAnswer": {"@type": "Answer", "text": "Estrutura do setor elétrico, instituições, ACR e ACL, unidades de medida, MCP e PLD, apuração do mercado de curto prazo, comercialização, medição e comercialização varejista."}},
+        {"@type": "Question", "name": "Como funciona a prova do simulado?",
+         "acceptedAnswer": {"@type": "Answer", "text": "A prova sorteia 15 questões de todas as áreas, com 25 minutos de duração, e mostra o gabarito comentado no final. Também há modo de estudo com correção imediata e treino nas áreas em que você mais erra."}}
+      ]
+    }
+  ]
+}
+</script>
 <meta name="author" content="Tatiana Cardoso Lima">
 <meta name="theme-color" content="#3B1E54">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Simulado Mercado de Energia · CCEE 2027">
+<meta property="og:title" content="Simulado CCEE 2027 grátis · Certificação de Operadores">
 <meta property="og:description" content="Questões comentadas, prova cronometrada e desempenho por área. Por Tatiana Cardoso Lima.">
 <meta property="og:url" content="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">
 <meta property="og:image" content="https://tatianacardosolima.github.io/simulado-mercado-de-energia/og-image.png">
@@ -100,6 +128,16 @@ nav button.on{background:var(--accent-soft);border-color:var(--accent);color:var
 table{width:100%;border-collapse:collapse;font-size:14px}
 td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
+.seo h2{font-size:18px;margin:0 0 8px}
+.seo h3{font-size:15px;margin:16px 0 6px}
+.seo p,.seo li{font-size:14px;color:var(--muted)}
+.seo a{color:var(--accent)}
+.seo .temas{padding-left:18px;margin:0}
+.seo .temas li{margin:4px 0}
+.seo details{border-top:1px solid var(--line);padding:8px 0;font-size:14px}
+.seo summary{cursor:pointer;font-weight:600}
+.seo details p{margin:6px 0 0}
+#seo[hidden]{display:none}
 footer button.cookies-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
 #cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;max-width:640px;margin:0 auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:13px}
 #cookies p{margin:0 0 8px}
@@ -113,7 +151,7 @@ footer button.cookies-link{background:none;border:0;padding:0;font:inherit;color
 <div class="topo"><div class="in">
   <header>
     <div class="logo" aria-hidden="true">TL</div>
-    <div><h1>Simulado Mercado de Energia</h1><p>CCEE 2027 · por Tatiana Cardoso Lima</p></div>
+    <div><h1>Simulado CCEE · Mercado de Energia</h1><p>Certificação de Operadores 2027 · por Tatiana Cardoso Lima</p></div>
     <button id="tema">Modo escuro</button>
   </header>
 </div></div>
@@ -125,6 +163,28 @@ footer button.cookies-link{background:none;border:0;padding:0;font:inherit;color
     <button data-v="desempenho">Desempenho</button>
   </nav>
   <main id="app"></main>
+  <section id="seo" class="card seo">
+    <h2>Simulado CCEE grátis para a Certificação de Operadores 2027</h2>
+    <p>Este simulado reúne mais de 300 questões de múltipla escolha, todas comentadas, para quem estuda para a <b>Certificação de Operadores da CCEE</b> (Câmara de Comercialização de Energia Elétrica). Dá para fazer uma prova cronometrada, estudar com correção na hora e treinar as áreas em que você mais erra. É gratuito, sem cadastro, e o seu progresso fica salvo no seu navegador.</p>
+    <h3>Questões por tema</h3>
+    <ul class="temas">
+      <li><a href="questoes/mcp.html">MCP: apuração do mercado de curto prazo</a> — balanço energético, NET × PLD, TMMCP, submercados, modulação e o relatório Sumário (SUM001)</li>
+      <li><a href="questoes/comercializacao-varejista.html">Comercialização varejista</a> — adesão, representação, desligamento, suspensão de fornecimento e migração</li>
+      <li><a href="questoes/mcp-e-pld.html">MCP e PLD</a> — exposição, convenção de sinais e preço de liquidação das diferenças</li>
+      <li><a href="questoes/acr-e-acl.html">ACR e ACL</a> — ambientes de contratação regulada e livre</li>
+      <li><a href="questoes/estrutura-do-seb.html">Estrutura do setor elétrico brasileiro</a></li>
+      <li><a href="questoes/instituicoes.html">Instituições do setor</a> — CCEE, ANEEL, ONS, MME e EPE</li>
+      <li><a href="questoes/comercializacao.html">Comercialização de energia</a></li>
+      <li><a href="questoes/medicao-e-etrm.html">Medição e ETRM</a></li>
+      <li><a href="questoes/unidades.html">Unidades de energia e potência</a></li>
+    </ul>
+    <p><a href="questoes/">Ver todas as questões por tema</a></p>
+    <h3>Perguntas frequentes</h3>
+    <details><summary>O simulado CCEE é gratuito?</summary><p>Sim. É gratuito, não precisa de cadastro e o seu progresso fica salvo só no seu navegador.</p></details>
+    <details><summary>Para qual prova é este simulado?</summary><p>Para a Certificação de Operadores da CCEE, edição 2027. As questões são autorais, para estudo, e não são oficiais da CCEE.</p></details>
+    <details><summary>Quais temas o simulado cobre?</summary><p>Estrutura do setor elétrico, instituições, ACR e ACL, unidades, MCP e PLD, apuração do mercado de curto prazo, comercialização, medição e comercialização varejista.</p></details>
+    <details><summary>Como funciona a prova do simulado?</summary><p>A prova sorteia 15 questões de todas as áreas, com 25 minutos, e mostra o gabarito comentado no final. Também há o modo de estudo com correção imediata e o treino nas áreas em que você mais erra.</p></details>
+  </section>
   <footer>Feito por <a href="https://www.linkedin.com/in/tatiana-cardoso-lima/" target="_blank" rel="noopener">Tatiana Cardoso Lima</a> · <a href="https://github.com/tatianacardosolima/simulado-mercado-de-energia" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">link do simulado</a><br>Questões autorais para estudo — não são oficiais da CCEE. · <button class="cookies-link" onclick="mostraCookies()">Cookies</button></footer>
   <div id="cookies" role="dialog" aria-label="Aviso de cookies" hidden>
     <p>Posso usar cookies do Google Analytics para contar os acessos ao simulado? Nada é usado para anúncios.</p>
@@ -188,6 +248,7 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => ir(b.data
 function ir(v){
   if(timer && v!=="prova-run"){ if(!confirm("Sair da prova em andamento?")) return; clearInterval(timer); timer=null; }
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", v.startsWith(b.dataset.v)));
+  $("#seo").hidden = v !== "inicio";
   ({inicio, prova, estudar, desempenho})[v]?.();
   scrollTo(0,0);
 }
