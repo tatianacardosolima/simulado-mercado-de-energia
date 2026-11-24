@@ -70,6 +70,9 @@ nav button.on{background:var(--accent-soft);border-color:var(--accent);color:var
 .op.ok{border-color:var(--ok);background:var(--ok-soft)}
 .op.bad{border-color:var(--bad);background:var(--bad-soft)}
 .exp{margin-top:10px;padding:12px;border-radius:10px;background:var(--accent-soft);font-size:14px}
+.reportar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin-top:8px;font-size:13px;color:var(--muted)}
+.reportar a{color:var(--muted);text-decoration:underline}
+.reportar a:hover{color:var(--accent)}
 .row{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .timer{font-variant-numeric:tabular-nums;font-weight:700}
 .bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;flex:1}
@@ -166,6 +169,19 @@ function ir(v){
 
 // ===== Compartilhar =====
 const LINK = "https://tatianacardosolima.github.io/simulado-mercado-de-energia/";
+
+// ===== Reportar erro (Google Forms com campos pré-preenchidos) =====
+const FORM_ERRO = "https://docs.google.com/forms/d/e/1FAIpQLSdQI4CTMBYnDwNDPbCOJtdmVPLGpIrHAkS0n3xyXm4whivPvA/viewform";
+function linkErro(i, marcada){
+  const p = new URLSearchParams({
+    usp: "pp_url",
+    "entry.169568045": String(i+1),
+    "entry.631469347": QUESTOES[i].q,
+    "entry.1887220918": marcada
+  });
+  return `<div class="reportar"><span>Questão nº ${i+1}</span>
+    <a href="${FORM_ERRO}?${p}" target="_blank" rel="noopener">Acho que essa resposta está errada</a></div>`;
+}
 const TEXTO_SHARE = "Simulado gratuito para a Certificação de Operadores da CCEE 2027:";
 function copiarLink(b){
   const aviso = (msg) => { b.textContent = msg; setTimeout(()=>b.textContent="Copiar link", 2500); };
@@ -248,6 +264,7 @@ function estudar(lista, titulo){
       document.querySelectorAll(".op").forEach(x=>{ x.disabled=true; const n=+x.dataset.j;
         if(n===q.c) x.classList.add("ok"); else if(n===j) x.classList.add("bad"); });
       $("#fb").innerHTML = `<div class="exp"><b>${ok?"Correta!":"Resposta: "+L[q.c]}</b> ${esc(q.exp)}</div>
+        ${linkErro(i, q.op[j])}
         <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="primary" id="prox">${k+1<fila.length?"Próxima":"Ver resultado"}</button></div>`;
       $("#prox").onclick = () => { k++; mostra(); };
     });
@@ -320,7 +337,8 @@ function comecaProva(){
         <div class="row"><span class="tag">${esc(q.area)}</span><b style="color:var(--${ok?"ok":"bad"})">${ok?"✓ Acertou":"✗ Errou"}</b></div>
         <p class="q">${n+1}. ${esc(q.q)}</p>
         ${q.op.map((o,j)=>`<div class="op ${j===q.c?"ok":j===r?"bad":""}" style="border:1px solid var(--line);border-radius:10px;padding:8px 12px">${L[j]}) ${esc(o)}</div>`).join("")}
-        <div class="exp">${r===null?"<b>Sem resposta.</b> ":""}${esc(q.exp)}</div></div>`; }).join("")}`;
+        <div class="exp">${r===null?"<b>Sem resposta.</b> ":""}${esc(q.exp)}</div>
+        ${linkErro(fila[n], r===null ? "(sem resposta)" : q.op[r])}</div>`; }).join("")}`;
     scrollTo(0,0);
   }
   timer = setInterval(tick, 1000);
