@@ -45,6 +45,9 @@ button.primary{color:#fff}
 .sobre p{margin:4px 0 0;font-size:14px;color:var(--muted)}
 .btn-link{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-size:14px;font-weight:600}
 footer a{color:var(--accent)}
+.share{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.share a,.share button{flex:1 1 140px;text-align:center;text-decoration:none;font-size:14px;font-weight:600;padding:9px 12px;border-radius:10px;border:1px solid var(--accent);color:var(--accent);background:var(--card)}
+.url{display:block;margin-top:6px;font-size:13px;color:var(--muted);word-break:break-all}
 :root[data-theme="dark"] button.primary,:root[data-theme="dark"] .btn-link{color:#2a0f22}
 button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 14px}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
@@ -98,7 +101,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
     <button data-v="desempenho">Desempenho</button>
   </nav>
   <main id="app"></main>
-  <footer>Feito por <a href="https://www.linkedin.com/in/tatiana-cardoso-lima/" target="_blank" rel="noopener">Tatiana Cardoso Lima</a> · <a href="https://github.com/tatianacardosolima/simulado-mercado-de-energia" target="_blank" rel="noopener">código no GitHub</a><br>Questões autorais para estudo — não são oficiais da CCEE.</footer>
+  <footer>Feito por <a href="https://www.linkedin.com/in/tatiana-cardoso-lima/" target="_blank" rel="noopener">Tatiana Cardoso Lima</a> · <a href="https://github.com/tatianacardosolima/simulado-mercado-de-energia" target="_blank" rel="noopener">código no GitHub</a> · <a href="https://tatianacardosolima.github.io/simulado-mercado-de-energia/">link do simulado</a><br>Questões autorais para estudo — não são oficiais da CCEE.</footer>
 </div>
 
 <script src="questoes.js"></script>
@@ -161,6 +164,26 @@ function ir(v){
   scrollTo(0,0);
 }
 
+// ===== Compartilhar =====
+const LINK = "https://tatianacardosolima.github.io/simulado-mercado-de-energia/";
+const TEXTO_SHARE = "Simulado gratuito para a Certificação de Operadores da CCEE 2027:";
+function copiarLink(b){
+  const aviso = (msg) => { b.textContent = msg; setTimeout(()=>b.textContent="Copiar link", 2500); };
+  const plano2 = () => {
+    const ta = document.createElement("textarea");
+    ta.value = LINK; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch(e) {}
+    ta.remove();
+    if (ok) return aviso("Link copiado!");
+    const u = document.querySelector(".url");
+    if (u) { const r = document.createRange(); r.selectNodeContents(u); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    aviso("Selecionei o link: Ctrl+C");
+  };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(LINK).then(()=>aviso("Link copiado!"), plano2);
+  else plano2();
+}
+
 // ===== Início =====
 function inicio(){
   const dias = Math.max(0, Math.ceil((new Date(CONFIG.dataProva) - new Date())/864e5));
@@ -180,6 +203,16 @@ function inicio(){
     </div>
     <button class="link" onclick="estudar()"><b>Estudar ${CONFIG.questoesEstudo} questões</b><span class="muted">Com a correção na hora</span></button>
     <button class="link" onclick="treino()"><b>Treino nos pontos fracos</b><span class="muted">${CONFIG.questoesTreino} questões das áreas em que você mais errou</span></button>
+    <div class="card">
+      <b>Compartilhe o simulado</b>
+      <span class="url">${esc(LINK)}</span>
+      <div class="share">
+        <button onclick="copiarLink(this)">Copiar link</button>
+        <a href="https://wa.me/?text=${encodeURIComponent(TEXTO_SHARE + " " + LINK)}" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(LINK)}" target="_blank" rel="noopener">LinkedIn</a>
+        ${navigator.share ? `<button onclick="navigator.share({title:document.title,text:TEXTO_SHARE,url:LINK}).catch(()=>{})">Mais opções</button>` : ""}
+      </div>
+    </div>
     <div class="card sobre">
       <img class="foto" src="foto.jpg" alt="Foto de Tatiana Cardoso Lima" width="88" height="88">
       <div>
