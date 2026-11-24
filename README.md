@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 239 questões de múltipla escolha, distribuídas em 8 áreas. As alternativas são embaralhadas a cada exibição.
+São 239 questões de múltipla escolha, distribuídas em 9 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -24,10 +24,11 @@ São 239 questões de múltipla escolha, distribuídas em 8 áreas. As alternati
 | Instituições | MME, EPE, ANEEL, ONS, CCEE |
 | ACR e ACL | Ambientes de contratação, abertura do mercado, uso da rede |
 | Unidades | MW, MWh, MW médio, valor nominal |
-| MCP e PLD | Mercado de curto prazo, exposição, convenção de sinais, funcionamento do SIN, papel da CCEE, dados de entrada (medição, contratos e PLD), trilha de liquidação |
+| MCP e PLD | Mercado de curto prazo, exposição, convenção de sinais |
 | Comercialização | Comercializadoras, sazonalização, flexibilidade |
 | Medição e ETRM | Contratos versus medição, posição energética, arquitetura |
 | Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, encerramento da representação, resolução e resilição, modelo simplificado, portabilidade, adesão à CCEE, retorno ao cativo, atendimento sem CCER, suspensão do fornecimento (modelos tradicional e simplificado) |
+| MCP | Apuração do mercado de curto prazo: funcionamento do SIN, papel da CCEE, dados de entrada (medição, contratos e PLD), trilha de liquidação |
 
 ## Como adicionar questões
 
