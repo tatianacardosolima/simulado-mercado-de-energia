@@ -106,6 +106,7 @@ nav button.on{background:var(--accent-soft);border-color:var(--accent);color:var
 .muted{color:var(--muted);font-size:14px}
 .link{display:block;width:100%;text-align:left;margin-bottom:10px;padding:16px}
 .link b{display:block}
+.sair{border:0;background:none;padding:0;margin:0 0 10px;color:var(--accent);font-size:14px}
 .tag{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:99px;margin-bottom:8px}
 .q{font-weight:600;margin:0 0 12px}
 .op{display:block;width:100%;text-align:left;margin-bottom:8px}
@@ -250,7 +251,7 @@ function ir(v){
   if(timer && v!=="prova-run"){ if(!confirm("Sair da prova em andamento?")) return; clearInterval(timer); timer=null; }
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", v.startsWith(b.dataset.v)));
   $("#seo").hidden = v !== "inicio";
-  ({inicio, prova, estudar, desempenho})[v]?.();
+  ({inicio, prova, estudar: escolheArea, desempenho})[v]?.();
   scrollTo(0,0);
 }
 
@@ -341,24 +342,49 @@ function inicio(){
     </div>`;
 }
 
+// ===== Estudo: escolha da área =====
+function escolheArea(){
+  const r = porArea();
+  const linhas = AREAS.slice().sort((x,y)=>x.localeCompare(y,"pt")).map(a=>{
+    const idx = QUESTOES.map((q,i)=>i).filter(i=>QUESTOES[i].area===a);
+    const vistas = idx.filter(i=>S.stats[i]).length;
+    const pct = r[a].v ? ` · ${Math.round(100*r[a].a/r[a].v)}% de acertos` : "";
+    return `<button class="link" data-area="${esc(a)}"><b>${esc(a)}</b><span class="muted">${idx.length} questões · ${vistas} ${vistas===1?"vista":"vistas"}${pct}</span></button>`;
+  }).join("");
+  $("#app").innerHTML = `<div class="card"><h2 style="margin-top:0">Estudar</h2>
+      <p class="muted">Escolha uma área para ver todas as questões dela, com a correção na hora. As que você ainda não viu aparecem primeiro.</p></div>
+    <button class="link" id="todas"><b>Todas as áreas</b><span class="muted">${CONFIG.questoesEstudo} questões sorteadas</span></button>
+    ${linhas}`;
+  $("#todas").onclick = () => estudar();
+  document.querySelectorAll("[data-area]").forEach(b => b.onclick = () => estudaArea(b.dataset.area));
+}
+function estudaArea(a){
+  const idx = QUESTOES.map((q,i)=>i).filter(i=>QUESTOES[i].area===a);
+  const novas = shuffle(idx.filter(i=>!S.stats[i])), vistas = shuffle(idx.filter(i=>S.stats[i]));
+  estudar(novas.concat(vistas), a, a);
+}
+
 // ===== Estudo (correção imediata) =====
-function estudar(lista, titulo){
+function estudar(lista, titulo, area){
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.v==="estudar"));
+  $("#seo").hidden = true;
   const fila = lista || sorteia(CONFIG.questoesEstudo);
-  ev(titulo && titulo.startsWith("Treino") ? "iniciou_treino" : "iniciou_estudo");
+  ev(titulo && titulo.startsWith("Treino") ? "iniciou_treino" : "iniciou_estudo", area ? {area} : {});
   let k = 0, acertos = 0;
   function mostra(){
     if(k >= fila.length){
       $("#app").innerHTML = `<div class="card"><h2>Fim do estudo</h2><p>${acertos} de ${fila.length} acertos (${Math.round(100*acertos/fila.length)}%).</p>
-        <div class="row"><button onclick="estudar()">Mais ${CONFIG.questoesEstudo}</button><button class="primary" onclick="ir('inicio')">Início</button></div></div>`;
+        <div class="row">${area ? "" : `<button onclick="estudar()">Mais ${CONFIG.questoesEstudo}</button>`}<button onclick="escolheArea()">Escolher área</button><button class="primary" onclick="ir('inicio')">Início</button></div></div>`;
       return;
     }
     const i = fila[k], q = mix(i);
     $("#app").innerHTML = `<div class="card">
       <div class="row"><span class="tag">${esc(q.area)}</span><span class="muted">${titulo||"Estudo"} • ${k+1}/${fila.length}</span></div>
+      ${area ? `<button class="sair" id="sair">← Escolher outra área</button>` : ""}
       <p class="q">${esc(q.q)}</p>
       ${q.op.map((o,j)=>`<button class="op" data-j="${j}">${L[j]}) ${esc(o)}</button>`).join("")}
       <div id="fb"></div></div>`;
+    if($("#sair")) $("#sair").onclick = () => { if(k===0 || confirm(`Parar aqui? Você respondeu ${k} de ${fila.length}; o que já respondeu fica salvo.`)) escolheArea(); };
     document.querySelectorAll(".op").forEach(b => b.onclick = () => {
       const j = +b.dataset.j, ok = j===q.c;
       if(ok) acertos++;
