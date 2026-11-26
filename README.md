@@ -16,7 +16,7 @@ O progresso fica salvo apenas no navegador de quem usa (`localStorage`). Não h�
 
 ## Conteúdo
 
-São 361 questões de múltipla escolha, distribuídas em 10 áreas. As alternativas são embaralhadas a cada exibição.
+São 392 questões de múltipla escolha, distribuídas em 10 áreas. As alternativas são embaralhadas a cada exibição.
 
 | Área | Temas |
 |---|---|
@@ -29,7 +29,7 @@ São 361 questões de múltipla escolha, distribuídas em 10 áreas. As alternat
 | Medição e ETRM | Contratos versus medição, posição energética, arquitetura |
 | Comercialização varejista | Representado e varejista, PdC 1.6 e 1.8, encerramento da representação, resolução e resilição, modelo simplificado, portabilidade, adesão à CCEE, retorno ao cativo, atendimento sem CCER, suspensão do fornecimento (modelos tradicional e simplificado) |
 | MCP | Apuração do mercado de curto prazo: funcionamento do SIN, papel da CCEE, dados de entrada, trilha de liquidação, energia verificada e contratada, balanço energético, recurso e requisito, exposição por tipo de agente, cálculo NET × PLD, TMMCP e resultado mensal, impacto do submercado de registro do contrato, modulação dos contratos (flat, conforme carga, geração e MRE, declarada, limites), relatório Sumário (SUM001), módulos que recebem o balanço energético |
-| TUSD/TUST | Energia incentivada e especial: tarifa fio e tarifa de energia, base legal do desconto, desconto de outorga e de repasse, papel da CCEE e das distribuidoras e transmissoras, fluxo e cálculo do desconto |
+| TUSD/TUST | Energia incentivada e especial: tarifa fio e tarifa de energia, base legal do desconto, desconto de outorga e de repasse, papel da CCEE e das distribuidoras e transmissoras, fluxo e cálculo do desconto, tipos de energia (incentivada/convencional, especial/não especial), enquadramento por fonte, data de outorga e potência, percentuais de 50%, 80% e 100%, desconto parcial, cogeração qualificada |
 
 ## Como adicionar questões
 
